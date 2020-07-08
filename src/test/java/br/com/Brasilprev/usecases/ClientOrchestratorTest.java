@@ -12,7 +12,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.Brasilprev.domains.ClientDomain;
 import com.Brasilprev.domains.exceptions.ResourceNotFoundException;

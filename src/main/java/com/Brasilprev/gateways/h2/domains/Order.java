@@ -1,11 +1,16 @@
 package com.Brasilprev.gateways.h2.domains;
 
+import java.math.BigDecimal;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -20,33 +25,32 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "CLIENT")
+@Table(name = "PURCHASE_ORDER")
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
-public class Client {
+public class Order {
 
 	@Id
+	@NotNull
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private Integer idClient;
+	private Integer idOrder;
 
 	@NotNull
-	@Column(name = "name_client")
-	private String nameClient;
+	@Column(name = "total_value")
+	private BigDecimal totalValue;
+
+	@OneToOne(cascade=CascadeType.DETACH)
+	@JoinColumn(name = "id_client", referencedColumnName = "id")
+	private Client client;
 
 	@NotNull
-	@Column(name = "cpf")
-	private String cpf;
-
-	@NotNull
-	@Column(name = "number_contact")
-	private String numberContact;
-
-	@OneToOne(mappedBy = "client",cascade = CascadeType.ALL)
-	private Order order;
+	@OneToMany(cascade = CascadeType.DETACH)
+	@JoinColumn(name = "id_order", referencedColumnName = "id")
+	private Set<Product> products;
 
 }

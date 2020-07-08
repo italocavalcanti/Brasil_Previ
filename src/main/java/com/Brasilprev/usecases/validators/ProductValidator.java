@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ProductValidator {
 
 	public static void validatorProductRequest(ProductRequest productRequest) {
-		log.info(" Client Validation: {} ", LogKey.CLIENT_VALIDATION);
+		log.info(" Product Validation: {} ", LogKey.CLIENT_VALIDATION);
 	}
 
 }

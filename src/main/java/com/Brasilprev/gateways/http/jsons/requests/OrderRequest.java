@@ -1,6 +1,8 @@
 package com.Brasilprev.gateways.http.jsons.requests;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Set;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -19,27 +21,27 @@ import lombok.ToString;
 @Setter
 @ToString
 @Builder
-public class ClientRequest implements Serializable {
+public class OrderRequest implements Serializable {
 	/**
 	* 
 	*/
 	private static final long serialVersionUID = 520842543117147690L;
-	
-	@ApiModelProperty(value = "ID Client", example = "1")
-	private Integer id;
 
 	@NotNull
 	@Size(max = 100)
 	@NotEmpty
-	@ApiModelProperty(value = "Name Client", required = true, example = "ITALO")
-	private String name;
+	@ApiModelProperty(value = "Client", required = true)
+	private ClientRequest ClientRequest;
 
 	@NotNull
-	@ApiModelProperty(value = "CPF", required = true)
-	private String cpf;
-
+	@Size(max = 100)
+	@NotEmpty
+	@ApiModelProperty(value = "Products", required = true)
+	private Set<ProductRequest> productsRequest;
+	
 	@NotNull
-	@ApiModelProperty(value = "Number Contact", required = true)
-	private String numberContact;
+	@NotEmpty
+	@ApiModelProperty(value = "Total Value", required = true, example = "100.00")
+	private BigDecimal totalValue;
 
 }

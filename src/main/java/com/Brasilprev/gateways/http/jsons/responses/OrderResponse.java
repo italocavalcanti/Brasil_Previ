@@ -1,5 +1,8 @@
 package com.Brasilprev.gateways.http.jsons.responses;
 
+import java.math.BigDecimal;
+import java.util.Set;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AccessLevel;
@@ -15,18 +18,18 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor
-public class ClientResponse {
+public class OrderResponse {
 
-	@ApiModelProperty(value = "Id client")
-	private Integer idClient;
+	@ApiModelProperty(value = "ID order process")
+	private Integer idOrder;
 
-	@ApiModelProperty(value = "Name Client")
-	private String name;
+	@ApiModelProperty(value = "Client", required = true)
+	private ClientResponse clientResponse;
 
-	@ApiModelProperty(value = "CPF")
-	private String cpf;
+	@ApiModelProperty(value = "Products")
+	private Set<ProductResponse> productResponse;
 
-	@ApiModelProperty(value = "Number Contact")
-	private String numberContact;
+	@ApiModelProperty(value = "Total Value")
+	private BigDecimal totalValue;
 
 }

@@ -13,6 +13,8 @@ public class ProductHttpAssembler {
 				  .idProduct(productDomain.getIdProduct())
 				  .nameProduct(productDomain.getNameProduct())
 				  .descriptionProduct(productDomain.getDescriptionProduct())
+				  .value(productDomain.getValue())
+				  .quantity(productDomain.getQuantity())
 				.build();
 	}
 

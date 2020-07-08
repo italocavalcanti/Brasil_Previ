@@ -1,6 +1,7 @@
 package com.Brasilprev.domains;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -16,10 +17,10 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
-public class ProductDomain {	
-	private Integer idProduct;
-	private String nameProduct;
-	private String descriptionProduct;
-	private Integer quantity;
-	private BigDecimal value;
+public class OrderDomain {
+	
+	private Integer idOrder;
+	private ClientDomain clientDomain;
+	private Set<ProductDomain> products;
+	private BigDecimal totalValue;
 }
