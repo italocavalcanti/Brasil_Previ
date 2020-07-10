@@ -13,6 +13,7 @@ import com.Brasilprev.gateways.h2.domains.Order;
 import com.Brasilprev.gateways.http.jsons.requests.OrderRequest;
 import com.Brasilprev.gateways.http.log.LogKey;
 import com.Brasilprev.usecases.assembler.OrderAssembler;
+import com.Brasilprev.usecases.exceptions.ValidationException;
 import com.Brasilprev.usecases.validators.OrderValidator;
 
 import io.undertow.util.BadRequestException;
@@ -28,7 +29,7 @@ public class OrderOrchestrator {
 		this.orderGateway = orderGateway;
 	}
 
-	public OrderDomain saveOrder(OrderRequest orderRequest) throws BadRequestException {
+	public OrderDomain saveOrder(OrderRequest orderRequest) throws BadRequestException, ValidationException {
 
 		OrderValidator.validatorOrderRequest(orderRequest);
 

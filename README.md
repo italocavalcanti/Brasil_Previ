@@ -1,20 +1,50 @@
 # Challenge Brasilprev 
 A REST API to simulate an online store.
+
 This store must have a record of its customers, products and orders.
 
+How Api deployed on azure:
 
-# Getting Started
+Generated image from the docker file.
 
-### Reference Documentation
-This api needs authentication and can be consumed by Swagger or PostMan.
+in the directory project:
 
-URL/swagger-ui.html
+-build image-
+0. mvn package
 
-### Guides
-The following guides illustrate how to use some features concretely:
+1. $ docker build -t brasilprev .
 
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/bookmarks/)
-* [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/)
+- tag image need repository local in docker -
+2. $ docker tag brasilprev brasilprevi/latest
+
+------------ test deploy azure --------------------
+
+-After I created a webapp and instantiated container on azure-
+-command push azure- (brasilprev is instance image docker azure create to test)
+3.  $ az acr login -n brasilprev && mvn compile jib:build
+
+-now just test-
+4. http://191.235.200.251:8080/swagger-ui.html
+
+-----------------------------------------------------
+
+------------ test deploy local with docker  ---------
+
+3 $ docker run -d -p 8080:8080 brasilprevi/latest
+
+-now just test-
+4 $ http://localhost:8080/swagger-ui.html
+
+-----------------------------------------------------
+
+# HOW GET TOKEN AUTHENTICATION
+
+1 Send request post to /authenticate  with user userPrevi and senha any.
+
+2 Return token its valid.
+
+3 To acess api add before token ex: Bearer axfgT1wT3a....
+
+
+
 

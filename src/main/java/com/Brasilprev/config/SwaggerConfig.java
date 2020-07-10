@@ -27,16 +27,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
 	
-//	@Bean
-//	public Docket api() {
-//	    return new Docket(DocumentationType.SWAGGER_2).select()
-//	        .apis(RequestHandlerSelectors.any())
-//	        .paths(PathSelectors.any())
-//	        .build()
-//	        .securitySchemes(Arrays.asList(securityScheme()))
-//	        .securityContexts(Arrays.asList(securityContext()));
-//	}
-
 	@Bean
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2).select()
@@ -48,7 +38,7 @@ public class SwaggerConfig {
 	}
 
 	private SecurityContext securityContext() {
-		return SecurityContext.builder().securityReferences(defaultAuth()).forPaths(PathSelectors.ant("/api/v1/client**"))
+		return SecurityContext.builder().securityReferences(defaultAuth()).forPaths(PathSelectors.regex("[*/A-Za-z0-9_]*"))
 				.build();
 	}
 
@@ -67,8 +57,6 @@ public class SwaggerConfig {
 			private static final long serialVersionUID = 1L;
 
 			{
-				add(new ResponseMessageBuilder().code(500).message("500 message").responseModel(new ModelRef("Error"))
-						.build());
 				add(new ResponseMessageBuilder().code(403).message("Forbidden!").build());
 			}
 		};

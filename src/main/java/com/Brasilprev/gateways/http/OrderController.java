@@ -21,6 +21,7 @@ import com.Brasilprev.gateways.http.jsons.responses.OrderResponse;
 import com.Brasilprev.gateways.http.log.JsonLogger;
 import com.Brasilprev.gateways.http.log.LogKey;
 import com.Brasilprev.usecases.OrderOrchestrator;
+import com.Brasilprev.usecases.exceptions.ValidationException;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -33,7 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/api/v1/order")
 @Api(value = "/api/v1/order", produces = MediaType.APPLICATION_JSON_VALUE)
-public class OrderController {
+public class OrderController extends CustomRestExceptionHandler {
 
 	private final JsonLogger jsonLogger;
 	private final OrderOrchestrator orderOrchestrator;
@@ -63,10 +64,12 @@ public class OrderController {
 			orderResponse = OrderHttpAssembler.parseObject(orderOrchestrator.saveOrder(orderRequest));
 			response = new ResponseEntity<>(orderResponse, HttpStatus.CREATED);
 		} catch (BadRequestException e) {
-			response = new ResponseEntity<>("Integration error", HttpStatus.UNPROCESSABLE_ENTITY);
-		}
+			response = new ResponseEntity<>("Integration error: ", HttpStatus.UNPROCESSABLE_ENTITY);
+		} catch (ValidationException e) {
+			response = new ResponseEntity<>("Validation Data: " + e.getErrorsMap(), HttpStatus.BAD_REQUEST);
+		} 
 
-		return response;
+		return response;	
 	}
 
 	@ApiOperation(value = "Search Order by Id")
@@ -91,7 +94,7 @@ public class OrderController {
 		}
 		return response;
 	}
-	
+
 	@ApiOperation(value = "Search Orders ")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success to find the Orders"),
 			@ApiResponse(code = 404, message = "Orders not found"),

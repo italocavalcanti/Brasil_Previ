@@ -13,6 +13,7 @@ import com.Brasilprev.gateways.h2.domains.Client;
 import com.Brasilprev.gateways.http.jsons.requests.ClientRequest;
 import com.Brasilprev.gateways.http.log.LogKey;
 import com.Brasilprev.usecases.assembler.ClientAssembler;
+import com.Brasilprev.usecases.exceptions.ValidationException;
 import com.Brasilprev.usecases.validators.ClientValidator;
 
 import io.undertow.util.BadRequestException;
@@ -28,7 +29,7 @@ public class ClientOrchestrator {
 		this.clientGateway = clientGateway;
 	}
 
-	public ClientDomain saveClient(ClientRequest clientRequest) throws BadRequestException {
+	public ClientDomain saveClient(ClientRequest clientRequest) throws BadRequestException, ValidationException {
 
 		ClientValidator.validatorClientRequest(clientRequest);
 

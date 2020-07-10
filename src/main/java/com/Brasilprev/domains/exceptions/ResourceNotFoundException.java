@@ -1,6 +1,7 @@
 package com.Brasilprev.domains.exceptions;
 
 public class ResourceNotFoundException extends Exception {
+	
 	/**
 	 * 
 	 */

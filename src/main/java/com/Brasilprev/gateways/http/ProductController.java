@@ -21,6 +21,7 @@ import com.Brasilprev.gateways.http.jsons.responses.ProductResponse;
 import com.Brasilprev.gateways.http.log.JsonLogger;
 import com.Brasilprev.gateways.http.log.LogKey;
 import com.Brasilprev.usecases.ProductOrchestrator;
+import com.Brasilprev.usecases.exceptions.ValidationException;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -63,7 +64,9 @@ public class ProductController {
 			productResponse = ProductHttpAssembler.parseObject(productOrchestrator.saveProduct(productRequest));
 			response = new ResponseEntity<>(productResponse, HttpStatus.CREATED);
 		} catch (BadRequestException e) {
-			response = new ResponseEntity<>("Integration error", HttpStatus.UNPROCESSABLE_ENTITY);
+			response = new ResponseEntity<>("Integration error ", HttpStatus.UNPROCESSABLE_ENTITY);
+		}catch (ValidationException  e) {
+			response = new ResponseEntity<>("Validation Data: " + e.getErrorsMap(), HttpStatus.BAD_REQUEST);
 		}
 
 		return response;

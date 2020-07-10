@@ -19,6 +19,7 @@ import com.Brasilprev.gateways.h2.ClientGateway;
 import com.Brasilprev.gateways.h2.domains.Client;
 import com.Brasilprev.gateways.http.jsons.requests.ClientRequest;
 import com.Brasilprev.usecases.ClientOrchestrator;
+import com.Brasilprev.usecases.exceptions.ValidationException;
 
 import io.undertow.util.BadRequestException;
 
@@ -27,12 +28,13 @@ public class ClientOrchestratorTest {
 	
 	@InjectMocks
 	ClientOrchestrator clientOrchestrator;
+	
 	@Mock
 	private ClientGateway clientGateway;
 	
 
 	@Test
-	public void saveClientCorrectly() throws BadRequestException {
+	public void saveClientCorrectly() throws BadRequestException, ValidationException {
 		// GIVEN a client valid must return id 1
 
 		ClientRequest clientRequest = getClientRequest();
@@ -44,7 +46,6 @@ public class ClientOrchestratorTest {
 
 		// THEN return client id 1
 		assertEquals(1, client.getIdClient());
-
 	}
 	
 	@Test
@@ -62,7 +63,6 @@ public class ClientOrchestratorTest {
 		assertEquals("09706044400", clientDomain.getCpf());
 		assertEquals("italo reis", clientDomain.getNameClient());
 		assertEquals("34536512", clientDomain.getNumberContact());
-
 	}
 	
 	@Test
@@ -90,7 +90,6 @@ public class ClientOrchestratorTest {
 			.build();
 	}
 
-
 	private ClientRequest getClientRequest() {
 		return ClientRequest.builder()
 								.cpf("09706044400")
@@ -98,5 +97,4 @@ public class ClientOrchestratorTest {
 								.numberContact("34536512")
 							.build();
 	}
-
 }
