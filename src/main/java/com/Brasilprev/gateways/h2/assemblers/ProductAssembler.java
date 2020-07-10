@@ -10,6 +10,8 @@ public class ProductAssembler {
 				.builder()
 				.descriptionProduct(productRequest.getDescriptionProduct())
 				.nameProduct(productRequest.getNameProduct())
+				.value(productRequest.getValue())
+				.quantity(productRequest.getQuantity())
 				.build();
 	}
 }

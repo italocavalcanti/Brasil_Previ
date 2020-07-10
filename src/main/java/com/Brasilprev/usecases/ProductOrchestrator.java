@@ -13,6 +13,7 @@ import com.Brasilprev.gateways.h2.domains.Product;
 import com.Brasilprev.gateways.http.jsons.requests.ProductRequest;
 import com.Brasilprev.gateways.http.log.LogKey;
 import com.Brasilprev.usecases.assembler.ProductAssembler;
+import com.Brasilprev.usecases.exceptions.ValidationException;
 import com.Brasilprev.usecases.validators.ProductValidator;
 
 import io.undertow.util.BadRequestException;
@@ -28,7 +29,7 @@ public class ProductOrchestrator {
 		this.productGateway = productGateway;
 	}
 
-	public ProductDomain saveProduct(ProductRequest productRequest) throws BadRequestException {
+	public ProductDomain saveProduct(ProductRequest productRequest) throws BadRequestException, ValidationException {
 
 		ProductValidator.validatorProductRequest(productRequest);
 

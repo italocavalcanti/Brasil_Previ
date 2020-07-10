@@ -1,5 +1,7 @@
 package com.Brasilprev.gateways.http.jsons.responses;
 
+import java.math.BigDecimal;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AccessLevel;
@@ -25,5 +27,10 @@ public class ProductResponse {
 
 	@ApiModelProperty(value = "Description Product")
 	private String descriptionProduct;
+	
+	@ApiModelProperty(value = "Quantity")
+	private Integer quantity;
 
+	@ApiModelProperty(value = "Value")
+	private BigDecimal value;
 }

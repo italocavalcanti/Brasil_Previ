@@ -13,12 +13,14 @@ public class ProductAssembler {
 							.idProduct(product.getIdProduct())
 							.nameProduct(product.getNameProduct())
 							.descriptionProduct(product.getDescriptionProduct())
+							.quantity(product.getQuantity())
+							.value(product.getValue())
 				           .build();
 	}
 
-	public static List<ProductDomain> listToDomain(List<Product> productRequest) {
+	public static List<ProductDomain> listToDomain(List<Product> products) {
 		List<ProductDomain> productsDomain = new ArrayList<>();
-		productRequest.stream().map(ProductAssembler::toDomain).forEach(productsDomain::add);
+		products.stream().map(ProductAssembler::toDomain).forEach(productsDomain::add);
 
 		return productsDomain;
 	}
